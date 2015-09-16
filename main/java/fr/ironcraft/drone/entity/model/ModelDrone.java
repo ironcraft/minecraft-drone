@@ -1,4 +1,4 @@
-package fr.dren.drone;
+package fr.ironcraft.drone.entity.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;

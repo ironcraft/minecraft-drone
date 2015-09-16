@@ -1,4 +1,4 @@
-package fr.dren.drone;
+package fr.ironcraft.drone.entity.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderLiving;
@@ -9,9 +9,12 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import fr.ironcraft.drone.BaseMod;
+import fr.ironcraft.drone.entity.model.ModelDrone;
+
 public class RenderEntityDrone extends RenderLiving
 {
-	private static final ResourceLocation texture = new ResourceLocation("drone/entity/drone.png");
+	private static final ResourceLocation texture = new ResourceLocation(BaseMod.MODID+":textures/entity/drone.png");
 	
 	public RenderEntityDrone()
 	{
@@ -32,7 +35,6 @@ public class RenderEntityDrone extends RenderLiving
 	
 	public void doRender(EntityLiving entity, double p_76986_2_, double p_76986_4_, double p_76986_6_, float p_76986_8_, float p_76986_9_)
     {
-		System.out.println("render");
 		super.doRender(entity, p_76986_2_, p_76986_4_, p_76986_6_, p_76986_8_, p_76986_9_);
     }
 }

@@ -1,4 +1,4 @@
-package fr.dren.drone.proxy;
+package fr.ironcraft.drone.proxy;
 
 public class CommonProxy
 {

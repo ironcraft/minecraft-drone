@@ -1,14 +1,14 @@
-package fr.dren.drone.proxy;
+package fr.ironcraft.drone.proxy;
 
+import fr.ironcraft.drone.entity.EntityDrone;
+import fr.ironcraft.drone.entity.render.RenderEntityDrone;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import fr.dren.drone.EntityDrone;
-import fr.dren.drone.RenderEntityDrone;
 
 public class ClientProxy extends CommonProxy
 {
 	public void init()
 	{
-		System.out.println("init");
+		System.out.println("Init ClientProxy");
 		RenderingRegistry.registerEntityRenderingHandler(EntityDrone.class, new RenderEntityDrone());
 	}
 }

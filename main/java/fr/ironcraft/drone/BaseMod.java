@@ -1,6 +1,7 @@
-package fr.dren.drone;
+package fr.ironcraft.drone;
 
-import fr.dren.drone.proxy.CommonProxy;
+import fr.ironcraft.drone.entity.EntityDrone;
+import fr.ironcraft.drone.proxy.CommonProxy;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -21,7 +22,7 @@ public class BaseMod
 
 	public static final String	MODID	= "drone";
 	public static final String	VERSION	= "1.0";
-	public static final String	PATH	= "fr.dren." + MODID;
+	public static final String	PATH	= "fr.ironcraft." + MODID;
 
 	@SidedProxy(clientSide = PATH + ".proxy.ClientProxy", serverSide = PATH + ".proxy.CommonProxy")
 	public static CommonProxy	proxy;
@@ -29,16 +30,15 @@ public class BaseMod
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
 	{
-
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
 		EntityRegistry.registerGlobalEntityID(EntityDrone.class, "Drone", EntityRegistry.findGlobalUniqueEntityId(), 0, 100);
-//		EntityRegistry.registerModEntity(EntityDrone.class, "Drone", EntityRegistry.findGlobalUniqueEntityId(), BaseMod.instance, 80, 3, true);
-//		LanguageRegistry.instance().addStringLocalization("entity.Drone.name", "en_US", "Drone");
+		EntityRegistry.registerModEntity(EntityDrone.class, "Drone", 0, this, 40, 1, true);
 		proxy.init();
+//		LanguageRegistry.instance().addStringLocalization("entity.Drone.name", "en_US", "Drone");
 	}
 
 	@EventHandler
