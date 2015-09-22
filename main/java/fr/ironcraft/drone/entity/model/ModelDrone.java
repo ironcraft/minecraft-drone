@@ -1,33 +1,21 @@
 package fr.ironcraft.drone.entity.model;
 
+import org.lwjgl.opengl.GL11;
+
+import fr.ironcraft.drone.entity.EntityDrone;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 
 public class ModelDrone extends ModelBase
 {
-	ModelRenderer	body;
-	ModelRenderer	arm0;
-	ModelRenderer	motor0;
-	ModelRenderer	elice0;
-	ModelRenderer	pale0;
-	ModelRenderer	pale0_1;
-	ModelRenderer	arm1;
-	ModelRenderer	motor1;
-	ModelRenderer	elice1;
-	ModelRenderer	pale01;
-	ModelRenderer	pale0_11;
-	ModelRenderer	arm2;
-	ModelRenderer	motor2;
-	ModelRenderer	elice2;
-	ModelRenderer	pale02;
-	ModelRenderer	pale0_12;
-	ModelRenderer	arm3;
-	ModelRenderer	motor3;
-	ModelRenderer	elice3;
-	ModelRenderer	pale03;
-	ModelRenderer	pale0_13;
+	ModelRenderer body;
+	ModelRenderer[]	arms;
+	ModelRenderer[]	motors;
+	ModelRenderer[]	elices;
+	ModelRenderer[][] pales;
 
 	public ModelDrone()
 	{
@@ -40,202 +28,212 @@ public class ModelDrone extends ModelBase
 		body.setTextureSize(64, 32);
 		body.addBox(-3F, -1F, -3F, 6, 2, 6);
 		body.setRotationPoint(0F, 23F, 0F);
-		arm0 = new ModelRenderer(this, 15, 15);
-		arm0.setTextureSize(64, 32);
-		arm0.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		arm0.setRotationPoint(-4F, 23F, -4F);
-		motor0 = new ModelRenderer(this, 15, 15);
-		motor0.setTextureSize(64, 32);
-		motor0.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		motor0.setRotationPoint(-6.474874F, 22F, -6.474874F);
-		elice0 = new ModelRenderer(this, 15, 15);
-		elice0.setTextureSize(64, 32);
-		elice0.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		elice0.setRotationPoint(-6.474874F, 21.5F, -6.474874F);
-		pale0 = new ModelRenderer(this, 15, 15);
-		pale0.setTextureSize(64, 32);
-		pale0.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale0.setRotationPoint(-7.535533F, 21.5F, -7.535534F);
-		pale0_1 = new ModelRenderer(this, 15, 15);
-		pale0_1.setTextureSize(64, 32);
-		pale0_1.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale0_1.setRotationPoint(-5.414214F, 21.5F, -5.414214F);
-		arm1 = new ModelRenderer(this, 15, 15);
-		arm1.setTextureSize(64, 32);
-		arm1.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		arm1.setRotationPoint(4F, 23F, -4F);
-		motor1 = new ModelRenderer(this, 15, 15);
-		motor1.setTextureSize(64, 32);
-		motor1.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		motor1.setRotationPoint(6.474874F, 22F, -6.474874F);
-		elice1 = new ModelRenderer(this, 15, 15);
-		elice1.setTextureSize(64, 32);
-		elice1.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		elice1.setRotationPoint(6.474874F, 21.5F, -6.474874F);
-		pale01 = new ModelRenderer(this, 15, 15);
-		pale01.setTextureSize(64, 32);
-		pale01.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale01.setRotationPoint(5.414214F, 21.5F, -5.414214F);
-		pale0_11 = new ModelRenderer(this, 15, 15);
-		pale0_11.setTextureSize(64, 32);
-		pale0_11.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale0_11.setRotationPoint(7.535533F, 21.5F, -7.535534F);
-		arm2 = new ModelRenderer(this, 15, 15);
-		arm2.setTextureSize(64, 32);
-		arm2.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		arm2.setRotationPoint(4F, 23F, 4F);
-		motor2 = new ModelRenderer(this, 15, 15);
-		motor2.setTextureSize(64, 32);
-		motor2.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		motor2.setRotationPoint(6.474874F, 22F, 6.474874F);
-		elice2 = new ModelRenderer(this, 15, 15);
-		elice2.setTextureSize(64, 32);
-		elice2.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		elice2.setRotationPoint(6.474874F, 21.5F, 6.474874F);
-		pale02 = new ModelRenderer(this, 15, 15);
-		pale02.setTextureSize(64, 32);
-		pale02.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale02.setRotationPoint(5.414214F, 21.5F, 5.414214F);
-		pale0_12 = new ModelRenderer(this, 15, 15);
-		pale0_12.setTextureSize(64, 32);
-		pale0_12.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale0_12.setRotationPoint(7.535533F, 21.5F, 7.535534F);
-		arm3 = new ModelRenderer(this, 15, 15);
-		arm3.setTextureSize(64, 32);
-		arm3.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		arm3.setRotationPoint(-4F, 23F, 4F);
-		motor3 = new ModelRenderer(this, 15, 15);
-		motor3.setTextureSize(64, 32);
-		motor3.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		motor3.setRotationPoint(-6.474874F, 22F, 6.474874F);
-		elice3 = new ModelRenderer(this, 15, 15);
-		elice3.setTextureSize(64, 32);
-		elice3.addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
-		elice3.setRotationPoint(-6.474874F, 21.5F, 6.474874F);
-		pale03 = new ModelRenderer(this, 15, 15);
-		pale03.setTextureSize(64, 32);
-		pale03.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale03.setRotationPoint(-7.535533F, 21.5F, 7.535534F);
-		pale0_13 = new ModelRenderer(this, 15, 15);
-		pale0_13.setTextureSize(64, 32);
-		pale0_13.addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
-		pale0_13.setRotationPoint(-5.414214F, 21.5F, 5.414214F);
+		arms = new ModelRenderer[4];
+		motors = new ModelRenderer[4];
+		elices = new ModelRenderer[4];
+		pales = new ModelRenderer[4][2];
 		
-		body.rotateAngleX = 0F;
-		body.rotateAngleY = 0F;
-		body.rotateAngleZ = 0F;
-
-		arm0.rotateAngleX = 0F;
-		arm0.rotateAngleY = -0.7853982F;
-		arm0.rotateAngleZ = 0F;
-
-		motor0.rotateAngleX = 0F;
-		motor0.rotateAngleY = -0.7853982F;
-		motor0.rotateAngleZ = 0F;
-
-		elice0.rotateAngleX = 0F;
-		elice0.rotateAngleY = -0.7853982F;
-		elice0.rotateAngleZ = 0F;
-
-		pale0.rotateAngleX = 0.5235987F;
-		pale0.rotateAngleY = -0.7853982F;
-		pale0.rotateAngleZ = 4.341565E-09F;
-
-		pale0_1.rotateAngleX = -0.5235987F;
-		pale0_1.rotateAngleY = -0.7853982F;
-		pale0_1.rotateAngleZ = -4.341565E-09F;
-
-		arm1.rotateAngleX = 0F;
-		arm1.rotateAngleY = 0.7853982F;
-		arm1.rotateAngleZ = 0F;
-
-		motor1.rotateAngleX = 0F;
-		motor1.rotateAngleY = 0.7853982F;
-		motor1.rotateAngleZ = 0F;
-
-		elice1.rotateAngleX = 0F;
-		elice1.rotateAngleY = 0.7853982F;
-		elice1.rotateAngleZ = 0F;
-
-		pale01.rotateAngleX = 0.5235987F;
-		pale01.rotateAngleY = 0.7853982F;
-		pale01.rotateAngleZ = -4.341565E-09F;
-
-		pale0_11.rotateAngleX = -0.5235987F;
-		pale0_11.rotateAngleY = 0.7853982F;
-		pale0_11.rotateAngleZ = 4.341565E-09F;
-
-		arm2.rotateAngleX = 0F;
-		arm2.rotateAngleY = -0.7853982F;
-		arm2.rotateAngleZ = 0F;
-
-		motor2.rotateAngleX = 0F;
-		motor2.rotateAngleY = -0.7853982F;
-		motor2.rotateAngleZ = 0F;
-
-		elice2.rotateAngleX = 0F;
-		elice2.rotateAngleY = -0.7853982F;
-		elice2.rotateAngleZ = 0F;
-
-		pale02.rotateAngleX = 0.5235987F;
-		pale02.rotateAngleY = -0.7853982F;
-		pale02.rotateAngleZ = 4.341565E-09F;
-
-		pale0_12.rotateAngleX = -0.5235987F;
-		pale0_12.rotateAngleY = -0.7853982F;
-		pale0_12.rotateAngleZ = -4.341565E-09F;
-
-		arm3.rotateAngleX = 0F;
-		arm3.rotateAngleY = 0.7853982F;
-		arm3.rotateAngleZ = 0F;
-
-		motor3.rotateAngleX = 0F;
-		motor3.rotateAngleY = 0.7853982F;
-		motor3.rotateAngleZ = 0F;
-
-		elice3.rotateAngleX = 0F;
-		elice3.rotateAngleY = 0.7853982F;
-		elice3.rotateAngleZ = 0F;
-
-//		pale03.rotateAngleX = 0.5235987F;
-//		pale03.rotateAngleY = 0.7853982F;
-//		pale03.rotateAngleZ = -4.341565E-09F;
-//
-//		pale0_13.rotateAngleX = -0.5235987F;
-//		pale0_13.rotateAngleY = 0.7853982F;
-//		pale0_13.rotateAngleZ = 4.341565E-09F;
+		arms[0] = new ModelRenderer(this, 15, 15);
+		arms[0].setTextureSize(64, 32);
+		arms[0].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		arms[0].setRotationPoint(-4F, 23F, -4F);
+		arms[1] = new ModelRenderer(this, 15, 15);
+		arms[1].setTextureSize(64, 32);
+		arms[1].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		arms[1].setRotationPoint(4F, 23F, -4F);
+		arms[2] = new ModelRenderer(this, 15, 15);
+		arms[2].setTextureSize(64, 32);
+		arms[2].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		arms[2].setRotationPoint(4F, 23F, 4F);
+		arms[3] = new ModelRenderer(this, 15, 15);
+		arms[3].setTextureSize(64, 32);
+		arms[3].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		arms[3].setRotationPoint(-4F, 23F, 4F);
 		
+		motors[0] = new ModelRenderer(this, 15, 15);
+		motors[0].setTextureSize(64, 32);
+		motors[0].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[0].setRotationPoint(-6.474874F, 22F, -6.474874F);
+		motors[1] = new ModelRenderer(this, 15, 15);
+		motors[1].setTextureSize(64, 32);
+		motors[1].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[1].setRotationPoint(6.474874F, 22F, -6.474874F);
+		motors[2] = new ModelRenderer(this, 15, 15);
+		motors[2].setTextureSize(64, 32);
+		motors[2].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[2].setRotationPoint(6.474874F, 22F, 6.474874F);
+		motors[3] = new ModelRenderer(this, 15, 15);
+		motors[3].setTextureSize(64, 32);
+		motors[3].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[3].setRotationPoint(-6.474874F, 22F, 6.474874F);
 		
-		//test
-		elice3.addChild(pale03);
-		elice3.addChild(pale0_13);
+		elices[0] = new ModelRenderer(this, 15, 15);
+		elices[0].setTextureSize(64, 32);
+		elices[0].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		elices[0].setRotationPoint(-6.474874F, 21.5F, -6.474874F);
+		elices[1] = new ModelRenderer(this, 15, 15);
+		elices[1].setTextureSize(64, 32);
+		elices[1].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		elices[1].setRotationPoint(6.474874F, 21.5F, -6.474874F);
+		elices[2] = new ModelRenderer(this, 15, 15);
+		elices[2].setTextureSize(64, 32);
+		elices[2].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		elices[2].setRotationPoint(6.474874F, 21.5F, 6.474874F);
+		elices[3] = new ModelRenderer(this, 15, 15);
+		elices[3].setTextureSize(64, 32);
+		elices[3].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		elices[3].setRotationPoint(-6.474874F, 21.5F, 6.474874F);
+		
+		pales[0][0] = new ModelRenderer(this, 15, 15);
+		pales[0][0].setTextureSize(64, 32);
+		pales[0][0].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[0][0].setRotationPoint(-7.535533F, 21.5F, -7.535534F);
+		pales[0][1] = new ModelRenderer(this, 15, 15);
+		pales[0][1].setTextureSize(64, 32);
+		pales[0][1].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[0][1].setRotationPoint(-5.414214F, 21.5F, -5.414214F);
+		pales[1][0] = new ModelRenderer(this, 15, 15);
+		pales[1][0].setTextureSize(64, 32);
+		pales[1][0].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[1][0].setRotationPoint(5.414214F, 21.5F, -5.414214F);
+		pales[1][1] = new ModelRenderer(this, 15, 15);
+		pales[1][1].setTextureSize(64, 32);
+		pales[1][1].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[1][1].setRotationPoint(7.535533F, 21.5F, -7.535534F);
+		pales[2][0] = new ModelRenderer(this, 15, 15);
+		pales[2][0].setTextureSize(64, 32);
+		pales[2][0].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[2][0].setRotationPoint(5.414214F, 21.5F, 5.414214F);
+		pales[2][1] = new ModelRenderer(this, 15, 15);
+		pales[2][1].setTextureSize(64, 32);
+		pales[2][1].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[2][1].setRotationPoint(7.535533F, 21.5F, 7.535534F);
+		pales[3][0] = new ModelRenderer(this, 15, 15);
+		pales[3][0].setTextureSize(64, 32);
+		pales[3][0].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[3][0].setRotationPoint(-7.535533F, 21.5F, 7.535534F);
+		pales[3][1] = new ModelRenderer(this, 15, 15);
+		pales[3][1].setTextureSize(64, 32);
+		pales[3][1].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
+		pales[3][1].setRotationPoint(-5.414214F, 21.5F, 5.414214F);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
 	{
 		super.render(entity, f, f1, f2, f3, f4, f5);
-		setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+		
+		GL11.glColor3f(0, 0, 0);
 		body.renderWithRotation(f5);
-		arm0.renderWithRotation(f5);
-		motor0.renderWithRotation(f5);
-		elice0.renderWithRotation(f5);
-		pale0.renderWithRotation(f5);
-		pale0_1.renderWithRotation(f5);
-		arm1.renderWithRotation(f5);
-		motor1.renderWithRotation(f5);
-		elice1.renderWithRotation(f5);
-		pale01.renderWithRotation(f5);
-		pale0_11.renderWithRotation(f5);
-		arm2.renderWithRotation(f5);
-		motor2.renderWithRotation(f5);
-		elice2.renderWithRotation(f5);
-		pale02.renderWithRotation(f5);
-		pale0_12.renderWithRotation(f5);
-		arm3.renderWithRotation(f5);
-		motor3.renderWithRotation(f5);
-		elice3.renderWithRotation(f5);
-		pale03.renderWithRotation(f5);
-		pale0_13.renderWithRotation(f5);
+		
+		for (int i = 0; i < 4; ++i)
+		{
+			GL11.glColor3f(1, 0, 1);
+			arms[i].renderWithRotation(f5);
+			GL11.glPushMatrix();
+	        GlStateManager.translate(motors[i].rotationPointX * f5, motors[i].rotationPointY * f5, motors[i].rotationPointZ * f5);
+	        GL11.glScaled(0.2f, 1f, 0.2f);
+	        GlStateManager.translate(-motors[i].rotationPointX * f5, -motors[i].rotationPointY * f5, -motors[i].rotationPointZ * f5);
+	        GL11.glColor3f(0, 0, 0);
+	        motors[i].renderWithRotation(f5);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+	        GlStateManager.translate(elices[i].rotationPointX * f5, elices[i].rotationPointY * f5, elices[i].rotationPointZ * f5);
+	        GL11.glScaled(0.5f, 0.5f, 0.5f);
+	        GlStateManager.translate(-elices[i].rotationPointX * f5, -elices[i].rotationPointY * f5, -elices[i].rotationPointZ * f5);
+	        GL11.glColor3f(1, 1, 1);
+	        elices[i].renderWithRotation(f5);
+			GL11.glPopMatrix();
+			for (int j = 0; j < 2; ++j)
+			{
+				GL11.glPushMatrix();
+				GlStateManager.translate(elices[i].rotationPointX * f5, elices[i].rotationPointY * f5, elices[i].rotationPointZ * f5);
+	        	GL11.glRotatef(((EntityDrone)entity).getAngleMotor() * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+	        	GlStateManager.translate(-elices[i].rotationPointX * f5, -elices[i].rotationPointY * f5, -elices[i].rotationPointZ * f5);
+	        	GlStateManager.translate(pales[i][j].rotationPointX * f5, pales[i][j].rotationPointY * f5, pales[i][j].rotationPointZ * f5);
+	        	if (pales[i][j].rotateAngleY != 0.0F)
+	        		GlStateManager.rotate(pales[i][j].rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+	        	if (pales[i][j].rotateAngleX != 0.0F)
+	        		GlStateManager.rotate(pales[i][j].rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+	        	if (pales[i][j].rotateAngleZ != 0.0F)
+	        		GlStateManager.rotate(pales[i][j].rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+	        	GL11.glScaled(0.3f, 0.1f, 1f);
+	        	GlStateManager.translate(-pales[i][j].rotationPointX * f5, -pales[i][j].rotationPointY * f5, -pales[i][j].rotationPointZ * f5);
+	        	pales[i][j].rotateAngleX = 0.0F;
+				pales[i][j].rotateAngleY = 0.0F;
+				pales[i][j].rotateAngleZ = 0.0F;
+				GL11.glColor3f(1, 0, 1);
+	        	pales[i][j].renderWithRotation(f5);
+	        	GL11.glPopMatrix();
+			}
+		}
+		
+		body.rotateAngleX = 0F;
+		body.rotateAngleY = 0F;
+		body.rotateAngleZ = 0F;
+		arms[0].rotateAngleX = 0F;
+		arms[0].rotateAngleY = -0.7853982F;
+		arms[0].rotateAngleZ = 0F;
+		motors[0].rotateAngleX = 0F;
+		motors[0].rotateAngleY = -0.7853982F;
+		motors[0].rotateAngleZ = 0F;
+		elices[0].rotateAngleX = 0F;
+		elices[0].rotateAngleY = -0.7853982F;
+		elices[0].rotateAngleZ = 0F;
+		
+		arms[1].rotateAngleX = 0F;
+		arms[1].rotateAngleY = 0.7853982F;
+		arms[1].rotateAngleZ = 0F;
+		motors[1].rotateAngleX = 0F;
+		motors[1].rotateAngleY = 0.7853982F;
+		motors[1].rotateAngleZ = 0F;
+		elices[1].rotateAngleX = 0F;
+		elices[1].rotateAngleY = 0.7853982F;
+		elices[1].rotateAngleZ = 0F;
+		
+		arms[2].rotateAngleX = 0F;
+		arms[2].rotateAngleY = -0.7853982F;
+		arms[2].rotateAngleZ = 0F;
+		motors[2].rotateAngleX = 0F;
+		motors[2].rotateAngleY = -0.7853982F;
+		motors[2].rotateAngleZ = 0F;
+		elices[2].rotateAngleX = 0F;
+		elices[2].rotateAngleY = -0.7853982F;
+		elices[2].rotateAngleZ = 0F;
+		
+		arms[3].rotateAngleX = 0F;
+		arms[3].rotateAngleY = 0.7853982F;
+		arms[3].rotateAngleZ = 0F;
+		motors[3].rotateAngleX = 0F;
+		motors[3].rotateAngleY = 0.7853982F;
+		motors[3].rotateAngleZ = 0F;
+		elices[3].rotateAngleX = 0F;
+		elices[3].rotateAngleY = 0.7853982F;
+		elices[3].rotateAngleZ = 0F;
+        
+		pales[0][0].rotateAngleX = 0.5235987F;
+		pales[0][0].rotateAngleY = -0.7853982F;
+		pales[0][0].rotateAngleZ = 4.341565E-09F;
+		pales[0][1].rotateAngleX = -0.5235987F;
+		pales[0][1].rotateAngleY = -0.7853982F;
+		pales[0][1].rotateAngleZ = -4.341565E-09F;
+		pales[1][0].rotateAngleX = 0.5235987F;
+		pales[1][0].rotateAngleY = 0.7853982F;
+		pales[1][0].rotateAngleZ = -4.341565E-09F;
+		pales[1][1].rotateAngleX = -0.5235987F;
+		pales[1][1].rotateAngleY = 0.7853982F;
+		pales[1][1].rotateAngleZ = 4.341565E-09F;
+		pales[2][0].rotateAngleX = 0.5235987F;
+		pales[2][0].rotateAngleY = -0.7853982F;
+		pales[2][0].rotateAngleZ = 4.341565E-09F;
+		pales[2][1].rotateAngleX = -0.5235987F;
+		pales[2][1].rotateAngleY = -0.7853982F;
+		pales[2][1].rotateAngleZ = -4.341565E-09F;
+		pales[3][0].rotateAngleX = 0.5235987F;
+        pales[3][0].rotateAngleY = 0.7853982F;
+        pales[3][0].rotateAngleZ = -4.341565E-09F;
+		pales[3][1].rotateAngleX = -0.5235987F;
+		pales[3][1].rotateAngleY = 0.7853982F;
+		pales[3][1].rotateAngleZ = 4.341565E-09F;
 	}
 
 	private void setRotation(ModelRenderer model, float x, float y, float z)
@@ -250,8 +248,11 @@ public class ModelDrone extends ModelBase
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
 		// topfin.rotateAngleZ = MathHelper.sin((f2/(180f/(float)Math.PI)*5))*0.1f;
 		
+		for (int i = 0; i < 4; ++i)
+			elices[i].rotateAngleY += ((EntityDrone)entity).getAngleMotor();
+		
 		//test
-		elice3.rotateAngleY += 0.5f;
+		((EntityDrone)entity).speed = 2f * ((1.0f + (float)Math.sin(f2 * Math.PI / 180f)) / 2.0f);
 	}
 
 }
