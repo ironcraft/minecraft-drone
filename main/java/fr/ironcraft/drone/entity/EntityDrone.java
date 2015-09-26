@@ -1,16 +1,20 @@
 package fr.ironcraft.drone.entity;
 
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityBat;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 public class EntityDrone extends EntityLiving
 {
-	public float speed;
-	private float anglemotor = 0.0f;
+	public double speed;
+	private float anglemotor;
 	public EntityDrone(World par1World)
 	{
 		super(par1World);
-		this.setSize(0.2F, 1F);
+		this.setSize(0.2F, 0.2F);
 	}
 	
 	public static <T extends Comparable<T>> T clamp(T val, T min, T max)
@@ -24,10 +28,24 @@ public class EntityDrone extends EntityLiving
 	
     public void onUpdate()
     {
-//    	super.onUpdate();
-    	float conv = ((float)Math.exp(5f + clamp(speed, 0.0f, 2.0f)) - 1.0f) / 22025.46484375f;
-		anglemotor += 8f * (conv < 0.01f ? 0.0f : (conv > 1.0f ? 1.0f : conv));
-    	anglemotor += 8f * (speed / 10f);
+
+    	speed = 2f * ((1.0f + (float)Math.sin(this.worldObj.getTotalWorldTime() * Math.PI / 180f)) / 2.0f);
+    	speed = clamp(speed, 0.0, 1.67);
+    	if (speed < 0.5)
+    		super.onUpdate();
+    	float conv = ((float)Math.exp(5f + speed) - 1.0f) / 22025.46484375f;
+		anglemotor += 32f * (conv < 0.006693f ? 0.0f : (conv > 1.0f ? 1.0f : conv));
+		if (this.speed > 1.5f)
+        {
+            this.motionX = this.motionY = this.motionZ = 0.0D;
+            BlockPos pos = new BlockPos(this);
+            pos = pos.down();
+            if (worldObj.getBlockState(pos).getBlock().isNormalCube())
+            {
+            	this.posY += 0.005;
+            	this.prevPosY += 0.005;
+            }
+        }
     }
     
     public float getAngleMotor()

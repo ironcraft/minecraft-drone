@@ -52,19 +52,19 @@ public class ModelDrone extends ModelBase
 		
 		motors[0] = new ModelRenderer(this, 15, 15);
 		motors[0].setTextureSize(64, 32);
-		motors[0].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[0].addBox(-0.5F, -0.5F, -0.5F, 1, 2, 1);
 		motors[0].setRotationPoint(-6.474874F, 22F, -6.474874F);
 		motors[1] = new ModelRenderer(this, 15, 15);
 		motors[1].setTextureSize(64, 32);
-		motors[1].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[1].addBox(-0.5F, -0.5F, -0.5F, 1, 2, 1);
 		motors[1].setRotationPoint(6.474874F, 22F, -6.474874F);
 		motors[2] = new ModelRenderer(this, 15, 15);
 		motors[2].setTextureSize(64, 32);
-		motors[2].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[2].addBox(-0.5F, -0.5F, -0.5F, 1, 2, 1);
 		motors[2].setRotationPoint(6.474874F, 22F, 6.474874F);
 		motors[3] = new ModelRenderer(this, 15, 15);
 		motors[3].setTextureSize(64, 32);
-		motors[3].addBox(-0.5F, -0.5F, -0.5F, 1, 1, 1);
+		motors[3].addBox(-0.5F, -0.5F, -0.5F, 1, 2, 1);
 		motors[3].setRotationPoint(-6.474874F, 22F, 6.474874F);
 		
 		elices[0] = new ModelRenderer(this, 15, 15);
@@ -116,56 +116,6 @@ public class ModelDrone extends ModelBase
 		pales[3][1].setTextureSize(64, 32);
 		pales[3][1].addBox(-4F, -0.5F, -0.5F, 8, 1, 1);
 		pales[3][1].setRotationPoint(-5.414214F, 21.5F, 5.414214F);
-	}
-
-	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
-	{
-		super.render(entity, f, f1, f2, f3, f4, f5);
-		
-		GL11.glColor3f(0, 0, 0);
-		body.renderWithRotation(f5);
-		
-		for (int i = 0; i < 4; ++i)
-		{
-			GL11.glColor3f(1, 0, 1);
-			arms[i].renderWithRotation(f5);
-			GL11.glPushMatrix();
-	        GlStateManager.translate(motors[i].rotationPointX * f5, motors[i].rotationPointY * f5, motors[i].rotationPointZ * f5);
-	        GL11.glScaled(0.2f, 1f, 0.2f);
-	        GlStateManager.translate(-motors[i].rotationPointX * f5, -motors[i].rotationPointY * f5, -motors[i].rotationPointZ * f5);
-	        GL11.glColor3f(0, 0, 0);
-	        motors[i].renderWithRotation(f5);
-			GL11.glPopMatrix();
-			GL11.glPushMatrix();
-	        GlStateManager.translate(elices[i].rotationPointX * f5, elices[i].rotationPointY * f5, elices[i].rotationPointZ * f5);
-	        GL11.glScaled(0.5f, 0.5f, 0.5f);
-	        GlStateManager.translate(-elices[i].rotationPointX * f5, -elices[i].rotationPointY * f5, -elices[i].rotationPointZ * f5);
-	        GL11.glColor3f(1, 1, 1);
-	        elices[i].renderWithRotation(f5);
-			GL11.glPopMatrix();
-			for (int j = 0; j < 2; ++j)
-			{
-				GL11.glPushMatrix();
-				GlStateManager.translate(elices[i].rotationPointX * f5, elices[i].rotationPointY * f5, elices[i].rotationPointZ * f5);
-	        	GL11.glRotatef(((EntityDrone)entity).getAngleMotor() * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-	        	GlStateManager.translate(-elices[i].rotationPointX * f5, -elices[i].rotationPointY * f5, -elices[i].rotationPointZ * f5);
-	        	GlStateManager.translate(pales[i][j].rotationPointX * f5, pales[i][j].rotationPointY * f5, pales[i][j].rotationPointZ * f5);
-	        	if (pales[i][j].rotateAngleY != 0.0F)
-	        		GlStateManager.rotate(pales[i][j].rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
-	        	if (pales[i][j].rotateAngleX != 0.0F)
-	        		GlStateManager.rotate(pales[i][j].rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
-	        	if (pales[i][j].rotateAngleZ != 0.0F)
-	        		GlStateManager.rotate(pales[i][j].rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
-	        	GL11.glScaled(0.3f, 0.1f, 1f);
-	        	GlStateManager.translate(-pales[i][j].rotationPointX * f5, -pales[i][j].rotationPointY * f5, -pales[i][j].rotationPointZ * f5);
-	        	pales[i][j].rotateAngleX = 0.0F;
-				pales[i][j].rotateAngleY = 0.0F;
-				pales[i][j].rotateAngleZ = 0.0F;
-				GL11.glColor3f(1, 0, 1);
-	        	pales[i][j].renderWithRotation(f5);
-	        	GL11.glPopMatrix();
-			}
-		}
 		
 		body.rotateAngleX = 0F;
 		body.rotateAngleY = 0F;
@@ -236,6 +186,74 @@ public class ModelDrone extends ModelBase
 		pales[3][1].rotateAngleZ = 4.341565E-09F;
 	}
 
+	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5)
+	{
+		super.render(entity, f, f1, f2, f3, f4, f5);
+		
+		GL11.glPushMatrix();
+		GlStateManager.translate(body.rotationPointX * f5, body.rotationPointY * f5, body.rotationPointZ * f5);
+		GL11.glScalef(0.6f, 0.6f, 0.6f);
+        GlStateManager.translate(-body.rotationPointX * f5, -body.rotationPointY * f5, -body.rotationPointZ * f5);
+		
+		GL11.glColor3f(0, 0, 0);
+		body.renderWithRotation(f5);
+		
+		for (int i = 0; i < 4; ++i)
+		{
+			GL11.glColor3f(1, 0, 1);
+			GL11.glPushMatrix();
+			GlStateManager.translate(arms[i].rotationPointX * f5, arms[i].rotationPointY * f5, arms[i].rotationPointZ * f5);
+	        GL11.glScaled(1, 0.2f, 1);
+	        GlStateManager.translate(-arms[i].rotationPointX * f5, -(arms[i].rotationPointY * f5), -arms[i].rotationPointZ * f5);
+			arms[i].renderWithRotation(f5);
+			GL11.glPopMatrix();
+			GL11.glPushMatrix();
+	        GlStateManager.translate(motors[i].rotationPointX * f5, motors[i].rotationPointY * f5, motors[i].rotationPointZ * f5);
+	        GL11.glScaled(0.2f, 1f, 0.2f);
+	        GlStateManager.translate(-motors[i].rotationPointX * f5, -motors[i].rotationPointY * f5, -motors[i].rotationPointZ * f5);
+	        GL11.glColor3f(0, 0, 0);
+	        motors[i].renderWithRotation(f5);
+	        GL11.glPopMatrix();
+			GL11.glPushMatrix();
+	        GlStateManager.translate(elices[i].rotationPointX * f5, elices[i].rotationPointY * f5, elices[i].rotationPointZ * f5);
+	        GL11.glScaled(0.5f, 0.5f, 0.5f);
+	        GlStateManager.translate(-elices[i].rotationPointX * f5, -elices[i].rotationPointY * f5, -elices[i].rotationPointZ * f5);
+	        GL11.glColor3f(1, 0, 1);
+	        elices[i].renderWithRotation(f5);
+			GL11.glPopMatrix();
+			for (int j = 0; j < 2; ++j)
+			{
+				float rx, ry, rz;
+				rx = pales[i][j].rotateAngleX;
+				ry = pales[i][j].rotateAngleY;
+				rz = pales[i][j].rotateAngleZ;
+				GL11.glPushMatrix();
+				GlStateManager.translate(elices[i].rotationPointX * f5, elices[i].rotationPointY * f5, elices[i].rotationPointZ * f5);
+	        	GL11.glRotatef(((EntityDrone)entity).getAngleMotor() * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+	        	GlStateManager.translate(-elices[i].rotationPointX * f5, -elices[i].rotationPointY * f5, -elices[i].rotationPointZ * f5);
+	        	GlStateManager.translate(pales[i][j].rotationPointX * f5, pales[i][j].rotationPointY * f5, pales[i][j].rotationPointZ * f5);
+	        	if (pales[i][j].rotateAngleY != 0.0F)
+	        		GlStateManager.rotate(pales[i][j].rotateAngleY * (180F / (float)Math.PI), 0.0F, 1.0F, 0.0F);
+	        	if (pales[i][j].rotateAngleX != 0.0F)
+	        		GlStateManager.rotate(pales[i][j].rotateAngleX * (180F / (float)Math.PI), 1.0F, 0.0F, 0.0F);
+	        	if (pales[i][j].rotateAngleZ != 0.0F)
+	        		GlStateManager.rotate(pales[i][j].rotateAngleZ * (180F / (float)Math.PI), 0.0F, 0.0F, 1.0F);
+	        	GL11.glScaled(0.3f, 0.1f, 0.6f);
+	        	GlStateManager.translate(-pales[i][j].rotationPointX * f5, -pales[i][j].rotationPointY * f5, -pales[i][j].rotationPointZ * f5);
+	        	pales[i][j].rotateAngleX = 0.0F;
+				pales[i][j].rotateAngleY = 0.0F;
+				pales[i][j].rotateAngleZ = 0.0F;
+				GL11.glColor3f(1, 1, 1);
+	        	pales[i][j].renderWithRotation(f5);
+	        	pales[i][j].rotateAngleX = rx;
+				pales[i][j].rotateAngleY = ry;
+				pales[i][j].rotateAngleZ = rz;
+	        	GL11.glPopMatrix();
+			}
+		}
+		GL11.glPopMatrix();
+	}
+
 	private void setRotation(ModelRenderer model, float x, float y, float z)
 	{
 		model.rotateAngleX = x;
@@ -249,10 +267,11 @@ public class ModelDrone extends ModelBase
 		// topfin.rotateAngleZ = MathHelper.sin((f2/(180f/(float)Math.PI)*5))*0.1f;
 		
 		for (int i = 0; i < 4; ++i)
-			elices[i].rotateAngleY += ((EntityDrone)entity).getAngleMotor();
+			elices[i].rotateAngleY = ((EntityDrone)entity).getAngleMotor();
 		
 		//test
 		((EntityDrone)entity).speed = 2f * ((1.0f + (float)Math.sin(f2 * Math.PI / 180f)) / 2.0f);
+//		((EntityDrone)entity).speed = 1f;
 	}
 
 }
