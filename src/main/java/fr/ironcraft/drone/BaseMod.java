@@ -1,8 +1,5 @@
 package fr.ironcraft.drone;
 
-import fr.ironcraft.drone.entity.EntityDrone;
-import fr.ironcraft.drone.proxy.CommonProxy;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -11,8 +8,8 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.EntityRegistry.EntityRegistration;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
+import fr.ironcraft.drone.entity.EntityDrone;
+import fr.ironcraft.drone.proxy.CommonProxy;
 
 @Mod(modid = BaseMod.MODID, version = BaseMod.VERSION)
 public class BaseMod

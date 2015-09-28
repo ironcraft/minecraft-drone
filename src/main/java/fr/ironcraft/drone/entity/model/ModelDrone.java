@@ -1,13 +1,13 @@
 package fr.ironcraft.drone.entity.model;
 
-import org.lwjgl.opengl.GL11;
-
-import fr.ironcraft.drone.entity.EntityDrone;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.MathHelper;
+
+import org.lwjgl.opengl.GL11;
+
+import fr.ironcraft.drone.entity.EntityDrone;
 
 public class ModelDrone extends ModelBase
 {
