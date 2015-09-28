@@ -1,0 +1,32 @@
+plugins {
+    id "net.minecraftforge.gradle.forge" version "2.0.1"
+}
+
+version = "1.0"
+group= "fr.ironcraft"
+archivesBaseName = "drone"
+
+minecraft 
+{
+    printf("${forgeTarget}")
+    version = "${mcTarget}-${forgeTarget}"
+    runDir = "run"
+    mappings = mappingsTarget
+}
+
+processResources
+{
+    inputs.property "version", project.version
+    inputs.property "mcversion", project.minecraft.version
+
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod.info'
+                
+        // replace version and mcversion
+        expand 'version':project.version, 'mcversion':project.minecraft.version
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+    }
+}
